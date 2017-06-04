@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">OptiPushClient Demo</string>
+    <string name="hello_new_user">Hello New User</string>
+    <string name="let_us_get_to_know_each_other">Let us get to know each other</string>
+</resources>

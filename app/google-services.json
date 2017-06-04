@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "802550866517",
+    "firebase_url": "https://optipushclient-demo.firebaseio.com",
+    "project_id": "optipushclient-demo",
+    "storage_bucket": "optipushclient-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802550866517:android:bd97f364fc8caed7",
+        "android_client_info": {
+          "package_name": "com.optimove.optipushclientdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "802550866517-6qmaf44kck4fkscuj9n550l70q957daa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.optimove.optipushclientdemo",
+            "certificate_hash": "449a5c7870de35cf23bb3ae51d5c6c96998d0ea0"
+          }
+        },
+        {
+          "client_id": "802550866517-snri5igfr3pl8d8d6id9mp413cpu1t0q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwYp8y73rBMmLqxbJ3aBoHH91OHz5n38Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802550866517-snri5igfr3pl8d8d6id9mp413cpu1t0q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
