@@ -1,10 +1,9 @@
 package com.optimove.optipushclientdemo;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
-import com.google.android.gms.auth.api.signin.SignInAccount;
 import com.google.firebase.auth.*;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +24,15 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = auth.getCurrentUser();
         if (currentUser == null)
-            startActivity(new Intent(this, SignInActivity.class));
+            startActivityForResult(new Intent(this, SignInActivity.class), 170);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode != 170)
+            super.onActivityResult(requestCode, resultCode, data);
+        else if (resultCode != RESULT_OK)
+            finish();
     }
 }

@@ -114,6 +114,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                setResult(RESULT_OK);
                 finish();
             }
         }, 1500);
