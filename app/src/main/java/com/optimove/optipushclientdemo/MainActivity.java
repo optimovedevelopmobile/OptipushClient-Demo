@@ -11,6 +11,7 @@ import com.google.firebase.auth.*;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
+    private PiwikManager piwikManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         auth = FirebaseAuth.getInstance();
+        piwikManager = PiwikManager.getInstance();
     }
 
     @Override
@@ -36,18 +38,28 @@ public class MainActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
         else if (resultCode != RESULT_OK)
             finish();
+        else
+            piwikManager.screen("/", "Main");
     }
 
     public void orderPizza(View view) {
 
-        String name = auth.getCurrentUser().getDisplayName();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser == null) {
+            openSignInActivity();
+            return;
+        }
+        String name = currentUser.getDisplayName();
         String message = "Bon apatite dear " + name;
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        piwikManager.event("Order", "Pizza");
     }
 
     public void signOut(View view) {
 
         auth.signOut();
+        piwikManager.event("Authentication", "user signed out");
+        piwikManager.updateUserId(null);
         openSignInActivity();
     }
 

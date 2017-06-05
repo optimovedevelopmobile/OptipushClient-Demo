@@ -18,8 +18,9 @@ import com.google.firebase.auth.*;
 public class SignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
     private static final String TAG = SignInActivity.class.getSimpleName();
-    private GoogleApiClient googleApiClient;
 
+    private PiwikManager piwikManager;
+    private GoogleApiClient googleApiClient;
     private TextView outputTextView;
 
     @Override
@@ -29,6 +30,8 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         setContentView(R.layout.activity_sign_in);
 
         outputTextView = (TextView) findViewById(R.id.outputTextView);
+        piwikManager = PiwikManager.getInstance();
+        piwikManager.screen("/", "Sign In");
 
         GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -91,9 +94,11 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = auth.getCurrentUser();
+                            piwikManager.event("Authentication", "success");
                             updateUi(user);
                         } else {
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            piwikManager.event("Authentication", "fail");
                             Toast.makeText(SignInActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             updateUi(null);
@@ -110,6 +115,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         }
 
         String welcomeMessage = "Hello " + currentUser.getDisplayName() + "! Let's order some PIZZA!";
+        piwikManager.updateUserId(currentUser.getUid());
         outputTextView.setText(welcomeMessage);
         new Handler().postDelayed(new Runnable() {
             @Override
